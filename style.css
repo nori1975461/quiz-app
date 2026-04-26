@@ -21,15 +21,16 @@ body {
   width: 100%;
   max-width: 560px;
   padding: 40px 32px;
-  min-height: 420px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 /* ---- 画面切り替え ---- */
 .screen { display: none; }
-.screen.active { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+.screen.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
 
 /* ---- スタート画面 ---- */
 .app-title {
@@ -39,12 +40,50 @@ body {
   text-align: center;
 }
 
-.subtitle {
-  color: #718096;
-  font-size: 1rem;
+.setting-group {
+  width: 100%;
 }
 
-/* ---- ボタン ---- */
+.setting-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.toggle-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.toggle-btn {
+  padding: 8px 18px;
+  border: 2px solid #e2e8f0;
+  border-radius: 99px;
+  background: #fff;
+  color: #4a5568;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.toggle-btn:hover {
+  border-color: #e53e3e;
+  color: #e53e3e;
+}
+
+.toggle-btn.active {
+  background: #e53e3e;
+  border-color: #e53e3e;
+  color: #fff;
+  font-weight: 700;
+}
+
+/* ---- ボタン共通 ---- */
 .btn {
   border: none;
   border-radius: 8px;
@@ -53,6 +92,7 @@ body {
   font-weight: 600;
   padding: 12px 36px;
   transition: opacity 0.15s, transform 0.1s;
+  width: 100%;
 }
 .btn:active { transform: scale(0.97); }
 
@@ -61,6 +101,22 @@ body {
   color: #fff;
 }
 .btn-primary:hover { opacity: 0.88; }
+
+.btn-secondary {
+  background: #edf2f7;
+  color: #4a5568;
+}
+.btn-secondary:hover { opacity: 0.80; }
+
+.btn-danger {
+  background: transparent;
+  color: #e53e3e;
+  border: 1.5px solid #e53e3e;
+  padding: 10px 36px;
+}
+.btn-danger:hover {
+  background: #fff5f5;
+}
 
 /* ---- プログレスバー ---- */
 .progress-bar-wrap {
@@ -79,13 +135,47 @@ body {
   width: 0%;
 }
 
-/* ---- 問題画面 ---- */
+/* ---- 問題画面メタ行 ---- */
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
 .question-count {
   font-size: 0.85rem;
   color: #718096;
-  align-self: flex-start;
 }
 
+/* ---- タイマー ---- */
+.timer {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 3px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #4a5568;
+  transition: border-color 0.3s, color 0.3s;
+  flex-shrink: 0;
+}
+
+.timer.danger {
+  border-color: #e53e3e;
+  color: #e53e3e;
+  animation: pulse 0.6s infinite alternate;
+}
+
+@keyframes pulse {
+  from { transform: scale(1); }
+  to   { transform: scale(1.15); }
+}
+
+/* ---- 問題文 ---- */
 .question-text {
   font-size: 1.2rem;
   font-weight: 600;
@@ -118,20 +208,17 @@ body {
   background: #fff5f5;
   border-color: #fc8181;
 }
-
 .choice-btn.correct {
   background: #f0fff4;
   border-color: #48bb78;
   color: #276749;
   font-weight: 600;
 }
-
 .choice-btn.incorrect {
   background: #fff5f5;
   border-color: #fc8181;
   color: #9b2c2c;
 }
-
 .choice-btn:disabled { cursor: default; }
 
 /* ---- フィードバック ---- */
@@ -143,17 +230,8 @@ body {
   width: 100%;
   text-align: center;
 }
-
-.feedback.correct-fb {
-  background: #f0fff4;
-  color: #276749;
-}
-
-.feedback.incorrect-fb {
-  background: #fff5f5;
-  color: #9b2c2c;
-}
-
+.feedback.correct-fb  { background: #f0fff4; color: #276749; }
+.feedback.incorrect-fb { background: #fff5f5; color: #9b2c2c; }
 .hidden { display: none !important; }
 
 /* ---- 結果画面 ---- */
@@ -162,22 +240,91 @@ body {
   font-weight: 700;
   color: #1a202c;
 }
-
 .score-text {
   font-size: 2.4rem;
   font-weight: 800;
   color: #e53e3e;
 }
-
 .score-comment {
   font-size: 1rem;
   color: #4a5568;
 }
 
+/* ---- 履歴画面 ---- */
+.history-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a202c;
+  align-self: flex-start;
+}
+
+.history-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 380px;
+  overflow-y: auto;
+}
+
+.history-item {
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.history-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: #718096;
+}
+
+.category-badge {
+  background: #ebf4ff;
+  color: #3182ce;
+  border-radius: 99px;
+  padding: 2px 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.history-date {
+  font-size: 0.78rem;
+  color: #a0aec0;
+}
+
+.history-score {
+  font-size: 0.95rem;
+  color: #4a5568;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.history-score-num {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #e53e3e;
+}
+
+.no-history {
+  text-align: center;
+  color: #a0aec0;
+  padding: 24px 0;
+}
+
 /* ---- レスポンシブ ---- */
 @media (max-width: 480px) {
   .container { padding: 28px 18px; }
-  .app-title { font-size: 1.6rem; }
+  .app-title  { font-size: 1.6rem; }
   .question-text { font-size: 1.05rem; }
   .score-text { font-size: 2rem; }
+  .history-item { flex-direction: column; align-items: flex-start; }
 }

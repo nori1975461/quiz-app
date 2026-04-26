@@ -12,8 +12,29 @@
     <!-- スタート画面 -->
     <div id="screen-start" class="screen active">
       <h1 class="app-title">一般常識クイズ</h1>
-      <p class="subtitle">全5問・4択形式</p>
+
+      <div class="setting-group">
+        <p class="setting-label">カテゴリ</p>
+        <div id="category-btns" class="toggle-group">
+          <button class="toggle-btn active" data-value="すべて">すべて</button>
+          <button class="toggle-btn" data-value="地理">地理</button>
+          <button class="toggle-btn" data-value="科学">科学</button>
+          <button class="toggle-btn" data-value="歴史">歴史</button>
+          <button class="toggle-btn" data-value="文化">文化</button>
+        </div>
+      </div>
+
+      <div class="setting-group">
+        <p class="setting-label">問題数</p>
+        <div id="count-btns" class="toggle-group">
+          <button class="toggle-btn active" data-value="5">5問</button>
+          <button class="toggle-btn" data-value="10">10問</button>
+          <button class="toggle-btn" data-value="all">全問</button>
+        </div>
+      </div>
+
       <button id="btn-start" class="btn btn-primary">スタート</button>
+      <button id="btn-history" class="btn btn-secondary">スコア履歴を見る</button>
     </div>
 
     <!-- 問題画面 -->
@@ -21,7 +42,10 @@
       <div class="progress-bar-wrap">
         <div id="progress-bar" class="progress-bar"></div>
       </div>
-      <p id="question-count" class="question-count"></p>
+      <div class="quiz-meta">
+        <p id="question-count" class="question-count"></p>
+        <div id="timer" class="timer">30</div>
+      </div>
       <h2 id="question-text" class="question-text"></h2>
       <div id="choices" class="choices"></div>
       <div id="feedback" class="feedback hidden"></div>
@@ -34,6 +58,15 @@
       <p id="score-text" class="score-text"></p>
       <p id="score-comment" class="score-comment"></p>
       <button id="btn-retry" class="btn btn-primary">もう一度挑戦する</button>
+      <button id="btn-to-history" class="btn btn-secondary">スコア履歴を見る</button>
+    </div>
+
+    <!-- 履歴画面 -->
+    <div id="screen-history" class="screen">
+      <h2 class="history-title">スコア履歴</h2>
+      <div id="history-list" class="history-list"></div>
+      <button id="btn-clear-history" class="btn btn-danger">履歴を削除</button>
+      <button id="btn-back" class="btn btn-secondary">戻る</button>
     </div>
 
   </div>
