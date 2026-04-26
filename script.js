@@ -163,7 +163,7 @@ function startTimer() {
 
 function updateTimerDisplay() {
   timerEl.textContent = timeLeft;
-  timerEl.className = 'timer' + (timeLeft <= 10 ? ' danger' : '');
+  timerEl.className = 'timer' + (timeLeft <= 7 ? ' danger' : '');
 }
 
 function timeExpired() {
