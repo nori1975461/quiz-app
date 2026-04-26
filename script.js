@@ -33,7 +33,7 @@ const allQuestions = [
   { question: '俳句の季語として「春」を表す言葉はどれですか？', choices: ['紅葉', '雪', '桜', '花火'], answer: 2, category: '文化' },
 ];
 
-const TIMER_SEC = 30;
+const TIMER_SEC = 10;
 const HISTORY_KEY = 'quizHistory';
 
 let questions = [];
