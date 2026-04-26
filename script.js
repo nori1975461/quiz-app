@@ -43,6 +43,7 @@ let selectedCategory = 'すべて';
 let selectedCount = 5;
 let timerInterval = null;
 let timeLeft = TIMER_SEC;
+let currentChoices = [];
 
 // ---- DOM refs ----
 const screenStart   = document.getElementById('screen-start');
@@ -129,11 +130,15 @@ function renderQuestion() {
   feedbackEl.textContent = '';
   btnNext.classList.add('hidden');
 
+  currentChoices = q.choices
+    .map((text, i) => ({ text, correct: i === q.answer }))
+    .sort(() => Math.random() - 0.5);
+
   choicesEl.innerHTML = '';
-  q.choices.forEach((text, i) => {
+  currentChoices.forEach((choice, i) => {
     const btn = document.createElement('button');
     btn.className = 'choice-btn';
-    btn.textContent = text;
+    btn.textContent = choice.text;
     btn.addEventListener('click', () => selectAnswer(i));
     choicesEl.appendChild(btn);
   });
@@ -162,13 +167,13 @@ function updateTimerDisplay() {
 }
 
 function timeExpired() {
-  const q = questions[currentIndex];
+  const correctText = currentChoices.find(c => c.correct).text;
   choicesEl.querySelectorAll('.choice-btn').forEach((btn, i) => {
     btn.disabled = true;
-    if (i === q.answer) btn.classList.add('correct');
+    if (currentChoices[i].correct) btn.classList.add('correct');
   });
   feedbackEl.className = 'feedback incorrect-fb';
-  feedbackEl.textContent = `時間切れ！正解は「${q.choices[q.answer]}」です。`;
+  feedbackEl.textContent = `時間切れ！正解は「${correctText}」です。`;
   const isLast = currentIndex === questions.length - 1;
   btnNext.textContent = isLast ? '結果を見る' : '次の問題へ';
   btnNext.classList.remove('hidden');
@@ -177,20 +182,20 @@ function timeExpired() {
 // ---- 回答選択 ----
 function selectAnswer(selectedIndex) {
   clearInterval(timerInterval);
-  const q = questions[currentIndex];
-  const isCorrect = selectedIndex === q.answer;
+  const isCorrect = currentChoices[selectedIndex].correct;
+  const correctText = currentChoices.find(c => c.correct).text;
   if (isCorrect) score++;
 
   choicesEl.querySelectorAll('.choice-btn').forEach((btn, i) => {
     btn.disabled = true;
-    if (i === q.answer) btn.classList.add('correct');
+    if (currentChoices[i].correct) btn.classList.add('correct');
     if (i === selectedIndex && !isCorrect) btn.classList.add('incorrect');
   });
 
   feedbackEl.className = 'feedback ' + (isCorrect ? 'correct-fb' : 'incorrect-fb');
   feedbackEl.textContent = isCorrect
     ? '正解！'
-    : `不正解… 正解は「${q.choices[q.answer]}」です。`;
+    : `不正解… 正解は「${correctText}」です。`;
 
   const isLast = currentIndex === questions.length - 1;
   btnNext.textContent = isLast ? '結果を見る' : '次の問題へ';

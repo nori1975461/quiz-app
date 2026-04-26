@@ -22,7 +22,7 @@
 
 body {
   font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
-  background: linear-gradient(160deg, #07112a 0%, #0d2050 50%, #07112a 100%);
+  background: linear-gradient(135deg, #0d2a8a 0%, #1565c0 40%, #f9a825 75%, #fdd835 100%);
   min-height: 100vh;
   display: flex;
   align-items: center;
