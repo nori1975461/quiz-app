@@ -437,6 +437,15 @@ function getComment(s, total) {
   return 'もう一度挑戦してみましょう！';
 }
 
+// ---- ユーティリティ ----
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 // ---- スコア履歴 ----
 function saveHistory(s, total) {
   const history = loadHistory();
@@ -466,11 +475,11 @@ function showHistory() {
     historyList.innerHTML = history.map(h => `
       <div class="history-item">
         <div class="history-meta">
-          <span class="category-badge">${h.category}</span>
-          <span>${h.count}</span>
-          <span class="history-date">${h.date}</span>
+          <span class="category-badge">${escapeHtml(h.category)}</span>
+          <span>${escapeHtml(h.count)}</span>
+          <span class="history-date">${escapeHtml(h.date)}</span>
         </div>
-        <div class="history-score">${h.total}問中 <span class="history-score-num">${h.score}問</span> 正解</div>
+        <div class="history-score">${escapeHtml(h.total)}問中 <span class="history-score-num">${escapeHtml(h.score)}問</span> 正解</div>
       </div>
     `).join('');
   }
