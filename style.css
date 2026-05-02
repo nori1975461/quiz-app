@@ -6,23 +6,23 @@
 
 /* ---- カラー変数 ---- */
 :root {
-  --blue-bg:       #07112a;
-  --blue-card:     #0c1d40;
-  --blue-item:     #102050;
-  --blue-border:   #1e3a70;
-  --blue-hover:    #162b5c;
+  --warm-bg:       #140402;
+  --warm-card:     #1e0804;
+  --warm-item:     #2c1006;
+  --warm-border:   #6a2818;
+  --warm-hover:    #3c1a0c;
   --gold:          #d4a92a;
   --gold-light:    #f0cc5a;
   --gold-dim:      rgba(212, 169, 42, 0.18);
   --red:           #e53e3e;
   --red-dim:       rgba(229, 62, 62, 0.15);
-  --text:          #c8d8f0;
-  --text-muted:    #5a7499;
+  --text:          #f0d8c0;
+  --text-muted:    #8a5848;
 }
 
 body {
   font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
-  background: linear-gradient(135deg, #0d2a8a 0%, #1565c0 40%, #f9a825 75%, #fdd835 100%);
+  background: #ffffff;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -31,12 +31,12 @@ body {
 }
 
 .container {
-  background: var(--blue-card);
+  background: #0a1a4a;
   border: 1px solid rgba(212, 169, 42, 0.25);
   border-radius: 18px;
   box-shadow:
-    0 0 40px rgba(212, 169, 42, 0.08),
-    0 8px 32px rgba(0, 0, 0, 0.5);
+    0 0 40px rgba(212, 100, 20, 0.12),
+    0 8px 32px rgba(0, 0, 0, 0.6);
   width: 100%;
   max-width: 560px;
   padding: 40px 32px;
@@ -84,68 +84,125 @@ body {
 
 .toggle-btn {
   padding: 8px 18px;
-  border: 1.5px solid var(--blue-border);
-  border-radius: 99px;
-  background: transparent;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #3c1a0c 0%, #280e04 100%);
+  border: 1px solid var(--warm-border);
+  border-top-color: #8a3a20;
+  box-shadow:
+    inset 0 1px 0 rgba(255,140,80,0.12),
+    inset 0 -1px 0 rgba(0,0,0,0.4),
+    0 2px 6px rgba(0,0,0,0.45);
   color: var(--text-muted);
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.18s;
+  transition: all 0.15s;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+  letter-spacing: 0.02em;
 }
 
 .toggle-btn:hover {
   border-color: var(--gold);
-  color: var(--gold);
+  border-top-color: var(--gold-light);
+  color: var(--gold-light);
+  background: linear-gradient(180deg, #4e2210 0%, #321004 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(212,169,42,0.15),
+    inset 0 -1px 0 rgba(0,0,0,0.4),
+    0 2px 8px rgba(212,169,42,0.15);
 }
 
 .toggle-btn.active {
-  background: linear-gradient(135deg, var(--gold), var(--gold-light));
-  border-color: transparent;
-  color: var(--blue-bg);
-  font-weight: 700;
+  background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold) 50%, #b8901e 100%);
+  border-color: #a07018;
+  border-top-color: #f8e080;
+  color: #1a0e00;
+  font-weight: 800;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,220,0.5),
+    inset 0 -2px 0 rgba(0,0,0,0.25),
+    0 3px 10px rgba(212,169,42,0.4);
+  text-shadow: 0 1px 0 rgba(255,240,150,0.4);
 }
 
 /* ---- ボタン共通 ---- */
 .btn {
-  border: none;
-  border-radius: 8px;
+  border-radius: 7px;
   cursor: pointer;
   font-size: 1rem;
-  font-weight: 700;
-  padding: 13px 36px;
-  transition: opacity 0.15s, transform 0.1s;
+  font-weight: 800;
+  padding: 14px 36px;
+  transition: filter 0.15s, transform 0.1s, box-shadow 0.1s;
   width: 100%;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.06em;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
-.btn:active { transform: scale(0.97); }
+.btn:active {
+  transform: translateY(2px);
+  filter: brightness(0.9);
+}
 
 .btn-primary {
-  background: linear-gradient(135deg, #c0282a, var(--red));
+  background: linear-gradient(180deg, #e84040 0%, #c02020 45%, #a01818 100%);
+  border: 1px solid #8a1010;
+  border-top-color: #f05050;
   color: #fff;
-  box-shadow: 0 4px 16px rgba(229, 62, 62, 0.35);
+  box-shadow:
+    inset 0 1px 0 rgba(255,180,180,0.25),
+    inset 0 -3px 0 rgba(0,0,0,0.3),
+    0 5px 18px rgba(180,20,20,0.5),
+    0 2px 4px rgba(0,0,0,0.4);
 }
-.btn-primary:hover { opacity: 0.88; }
+.btn-primary:hover {
+  background: linear-gradient(180deg, #f04848 0%, #d02828 45%, #b02020 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,180,180,0.3),
+    inset 0 -3px 0 rgba(0,0,0,0.3),
+    0 7px 24px rgba(200,30,30,0.55),
+    0 2px 4px rgba(0,0,0,0.4);
+}
 
 .btn-secondary {
-  background: transparent;
-  color: var(--gold);
-  border: 1.5px solid rgba(212, 169, 42, 0.4);
+  background: linear-gradient(180deg, #3c1a0c 0%, #260e04 100%);
+  color: var(--gold-light);
+  border: 1px solid var(--warm-border);
+  border-top-color: #8a3a20;
+  box-shadow:
+    inset 0 1px 0 rgba(255,140,80,0.15),
+    inset 0 -3px 0 rgba(0,0,0,0.35),
+    0 4px 12px rgba(0,0,0,0.4);
 }
 .btn-secondary:hover {
-  background: var(--gold-dim);
+  background: linear-gradient(180deg, #4e2210 0%, #321006 100%);
   border-color: var(--gold);
+  border-top-color: var(--gold-light);
+  color: var(--gold-light);
+  box-shadow:
+    inset 0 1px 0 rgba(212,169,42,0.2),
+    inset 0 -3px 0 rgba(0,0,0,0.35),
+    0 4px 14px rgba(212,169,42,0.2);
 }
 
 .btn-danger {
-  background: transparent;
-  color: var(--red);
-  border: 1.5px solid rgba(229, 62, 62, 0.4);
-  padding: 10px 36px;
+  background: linear-gradient(180deg, #2a1008 0%, #1a0804 100%);
+  color: #f08080;
+  border: 1px solid rgba(180, 40, 40, 0.5);
+  border-top-color: rgba(220, 80, 80, 0.4);
+  padding: 11px 36px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,100,100,0.08),
+    inset 0 -2px 0 rgba(0,0,0,0.35),
+    0 3px 10px rgba(0,0,0,0.35);
 }
 .btn-danger:hover {
-  background: var(--red-dim);
+  background: linear-gradient(180deg, #38140a 0%, #220a04 100%);
   border-color: var(--red);
+  border-top-color: #f06060;
+  color: #ffaaaa;
+  box-shadow:
+    inset 0 1px 0 rgba(255,120,120,0.12),
+    inset 0 -2px 0 rgba(0,0,0,0.35),
+    0 3px 12px rgba(200,40,40,0.3);
 }
 
 /* ---- プログレスバー ---- */
@@ -224,32 +281,54 @@ body {
 }
 
 .choice-btn {
-  background: var(--blue-item);
-  border: 1.5px solid var(--blue-border);
-  border-radius: 10px;
+  background: linear-gradient(180deg, #361408 0%, #240c04 100%);
+  border: 1px solid var(--warm-border);
+  border-top-color: #8a3820;
+  border-radius: 7px;
   color: var(--text);
   cursor: pointer;
   font-size: 1rem;
+  font-weight: 600;
   padding: 14px 18px;
   text-align: left;
-  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, box-shadow 0.15s;
   width: 100%;
+  box-shadow:
+    inset 0 1px 0 rgba(255,140,80,0.1),
+    inset 0 -2px 0 rgba(0,0,0,0.35),
+    0 2px 6px rgba(0,0,0,0.35);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 .choice-btn:hover:not(:disabled) {
-  background: var(--blue-hover);
+  background: linear-gradient(180deg, #4e2010 0%, #320e04 100%);
   border-color: var(--gold);
+  border-top-color: var(--gold-light);
   color: var(--gold-light);
+  box-shadow:
+    inset 0 1px 0 rgba(212,169,42,0.15),
+    inset 0 -2px 0 rgba(0,0,0,0.35),
+    0 3px 10px rgba(212,169,42,0.2);
 }
 .choice-btn.correct {
-  background: rgba(212, 169, 42, 0.15);
+  background: linear-gradient(180deg, #2a2010 0%, #1a1408 100%);
   border-color: var(--gold);
+  border-top-color: var(--gold-light);
   color: var(--gold-light);
   font-weight: 700;
+  box-shadow:
+    inset 0 1px 0 rgba(212,169,42,0.2),
+    inset 0 -2px 0 rgba(0,0,0,0.3),
+    0 3px 12px rgba(212,169,42,0.3);
 }
 .choice-btn.incorrect {
-  background: var(--red-dim);
+  background: linear-gradient(180deg, #2a0c0c 0%, #1a0808 100%);
   border-color: var(--red);
+  border-top-color: #f06060;
   color: #f08080;
+  box-shadow:
+    inset 0 1px 0 rgba(255,100,100,0.1),
+    inset 0 -2px 0 rgba(0,0,0,0.3),
+    0 3px 10px rgba(200,30,30,0.25);
 }
 .choice-btn:disabled { cursor: default; }
 
@@ -315,12 +394,12 @@ body {
   max-height: 380px;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: var(--blue-border) transparent;
+  scrollbar-color: var(--warm-border) transparent;
 }
 
 .history-item {
-  background: var(--blue-item);
-  border: 1px solid var(--blue-border);
+  background: var(--warm-item);
+  border: 1px solid var(--warm-border);
   border-radius: 10px;
   padding: 12px 16px;
   display: flex;
@@ -373,6 +452,44 @@ body {
   text-align: center;
   color: var(--text-muted);
   padding: 24px 0;
+}
+
+/* ---- 花吹雪キャンバス ---- */
+#confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+  display: none;
+}
+
+/* ---- おめでとうメッセージ ---- */
+.congrats-msg {
+  font-size: 1.7rem;
+  font-weight: 900;
+  text-align: center;
+  letter-spacing: 0.06em;
+  background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 40%, #fff8c0 60%, var(--gold) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: congrats-shine 1.6s linear infinite, congrats-pop 0.5s ease-out;
+  filter: drop-shadow(0 0 8px rgba(212, 169, 42, 0.6));
+}
+
+@keyframes congrats-shine {
+  from { background-position: 200% center; }
+  to   { background-position: 0% center; }
+}
+
+@keyframes congrats-pop {
+  0%   { transform: scale(0.5); opacity: 0; }
+  70%  { transform: scale(1.1); }
+  100% { transform: scale(1);   opacity: 1; }
 }
 
 /* ---- レスポンシブ ---- */
