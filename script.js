@@ -132,6 +132,8 @@ let selectedCount = 10;
 let timerInterval = null;
 let timeLeft = TIMER_SEC;
 let currentChoices = [];
+let resultChartInstance = null;
+let scoreChartInstance = null;
 
 // ---- DOM refs ----
 const screenStart   = document.getElementById('screen-start');
@@ -318,6 +320,44 @@ function showResult() {
     congratsMsg.classList.add('hidden');
     showScreen(screenResult);
   }
+  renderResultChart(score, total);
+}
+
+function renderResultChart(score, total) {
+  const ctx = document.getElementById('result-chart').getContext('2d');
+  if (resultChartInstance) resultChartInstance.destroy();
+  resultChartInstance = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['正解', '不正解'],
+      datasets: [{
+        data: [score, total - score],
+        backgroundColor: ['rgba(212, 169, 42, 0.85)', 'rgba(229, 62, 62, 0.8)'],
+        borderColor: ['#d4a92a', '#e53e3e'],
+        borderWidth: 1,
+        borderRadius: 6,
+      }],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => `${ctx.parsed.y}問` } },
+      },
+      scales: {
+        x: {
+          grid: { color: 'rgba(255,255,255,0.06)' },
+          ticks: { color: '#f0d8c0', font: { weight: '600' } },
+        },
+        y: {
+          beginAtZero: true,
+          max: total,
+          ticks: { stepSize: 1, color: '#8a5848' },
+          grid: { color: 'rgba(255,255,255,0.06)' },
+        },
+      },
+    },
+  });
 }
 
 // ---- 花吹雪 ----
@@ -435,6 +475,53 @@ function showHistory() {
     `).join('');
   }
   showScreen(screenHistory);
+  renderHistoryChart(history);
+}
+
+function renderHistoryChart(history) {
+  const ctx = document.getElementById('score-chart').getContext('2d');
+  if (scoreChartInstance) scoreChartInstance.destroy();
+  if (history.length === 0) return;
+
+  const recent = history.slice(0, 10).reverse();
+  const labels = recent.map((_, i) => `第${i + 1}回`);
+  const percentages = recent.map(h => Math.round(h.score / h.total * 100));
+  const colors = percentages.map(p =>
+    p >= 80 ? 'rgba(212, 169, 42, 0.85)' :
+    p >= 50 ? 'rgba(230, 130, 30, 0.85)' :
+              'rgba(229, 62, 62, 0.8)'
+  );
+
+  scoreChartInstance = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        data: percentages,
+        backgroundColor: colors,
+        borderRadius: 6,
+      }],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => `正解率: ${ctx.parsed.y}%` } },
+      },
+      scales: {
+        x: {
+          grid: { color: 'rgba(255,255,255,0.06)' },
+          ticks: { color: '#8a5848', font: { size: 11 } },
+        },
+        y: {
+          beginAtZero: true,
+          max: 100,
+          ticks: { color: '#8a5848', callback: v => v + '%' },
+          grid: { color: 'rgba(255,255,255,0.06)' },
+        },
+      },
+    },
+  });
 }
 
 function clearHistory() {

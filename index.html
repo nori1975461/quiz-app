@@ -64,6 +64,9 @@
       <h2 class="result-title">結果発表</h2>
       <p id="score-text" class="score-text"></p>
       <p id="score-comment" class="score-comment"></p>
+      <div class="chart-container">
+        <canvas id="result-chart"></canvas>
+      </div>
       <button id="btn-retry" class="btn btn-primary">もう一度挑戦する</button>
       <button id="btn-to-history" class="btn btn-secondary">スコア履歴を見る</button>
     </div>
@@ -71,6 +74,9 @@
     <!-- 履歴画面 -->
     <div id="screen-history" class="screen">
       <h2 class="history-title">スコア履歴</h2>
+      <div class="chart-container">
+        <canvas id="score-chart"></canvas>
+      </div>
       <div id="history-list" class="history-list"></div>
       <button id="btn-clear-history" class="btn btn-danger">履歴を削除</button>
       <button id="btn-back" class="btn btn-secondary">戻る</button>
@@ -78,6 +84,7 @@
 
   </div>
   <canvas id="confetti-canvas"></canvas>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

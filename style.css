@@ -454,6 +454,15 @@ body {
   padding: 24px 0;
 }
 
+/* ---- グラフ ---- */
+.chart-container {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(106, 40, 24, 0.4);
+  border-radius: 12px;
+  padding: 16px 12px;
+}
+
 /* ---- 花吹雪キャンバス ---- */
 #confetti-canvas {
   position: fixed;
